@@ -1,0 +1,30 @@
+<input type="file" (change)="onFileSelected($event)">
+<button (click)="onUpload()">Upload</button>
+
+<hr>
+
+<div class="image-container">
+  <div *ngFor="let image of images; let i = index" class="image-item">
+    <img [src]="image" alt="Image" style="width: 150px;">
+    <div class="image-details">
+      <p>{{imgs[i].name}}</p>
+      <p>{{imgs[i].description}}</p>
+      <p>{{imgs[i].latitude}}</p>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <label for="importance">Importance:</label>
+  <input type="text" id="importance" [(ngModel)]="importance">
+  <button (click)="searchImagesByImportance(importance)">Search</button>
+</div>
+
+<div *ngIf="imagesSearch">
+  <ul *ngFor="let image of imagesSearch">
+    <li>{{ image.name }}</li>
+    <li>{{ image.description }}</li>
+    <li><img [src]="getImageUrl(image.content)" alt="Slika"></li>
+  </ul>
+</div>
